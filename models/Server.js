@@ -1,6 +1,12 @@
 import express from "express";
 import db from '../db/connection.js';
 import pacienteRoutes from '../routes/paciente.js'
+import medicoRoutes from '../routes/medico.js'
+import licenciamedicaRoutes from '../routes/licenciamedica.js'
+import especialidadRoutes from '../routes/especialidad.js'
+import consultamedicaRoutes from '../routes/consultamedica.js'
+
+
 
 class Server {
     constructor(){
@@ -8,11 +14,12 @@ class Server {
         this.port =  process.env.PORT || '8000';
 
         this.apiPaths = {
-            pacientes:'/api/pacientes'
-            // especialistas:'/api/especialistas',
-            // expedientes:'/api/expedientes',
-            // citas:'/api/citas',
-            // agendar_citas:'api/agendar_citas'
+            pacientes:'/api/pacientes',
+            medicos:'/api/medicos', 
+            licenciasmedicas:'/api/licenciasmedicas',
+            especialidades:'/api/especialidades',
+            consultasmedicas:'/api/consultasmedicas'
+
         }
 
         // Vamos a definir e iniciar nuestros metodos
@@ -37,11 +44,11 @@ class Server {
     }
 
     routes(){
-        this.app.use( this.apiPaths.pacientes, pacienteRoutes )
-        // this.app.use(this.apiPaths.especialistas,  )
-        // this.app.use(this.apiPaths.expedientes,  )
-        // this.app.use(this.apiPaths.citas,  )
-        // this.app.use(this.apiPaths.agendar_citas,  )
+        this.app.use( this.apiPaths.pacientes, pacienteRoutes ) 
+        this.app.use( this.apiPaths.medicos, medicoRoutes ) 
+        this.app.use( this.apiPaths.licenciasmedicas, licenciamedicaRoutes ) 
+        this.app.use( this.apiPaths.especialidades, especialidadRoutes )
+        this.app.use( this.apiPaths.consultasmedicas, consultamedicaRoutes )
     }
 
     listen(){
